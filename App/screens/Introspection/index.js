@@ -10,12 +10,12 @@ const styles = StyleSheet.create({
   },
 });
 
-const Hobbies = () => {
+const Introspection = () => {
   return (
     <View style={styles.container}>
-      <Header text="Hobbies" />
+      <Header text="Introspection" />
     </View>
   );
 };
 
-export default Hobbies;
+export default Introspection;

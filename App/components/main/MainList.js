@@ -1,30 +1,29 @@
 import React from 'react';
 import {Text, StyleSheet, TouchableOpacity} from 'react-native';
-import Ruler from '../common/Ruler';
 
-const styles = StyleSheet.create({
-  card: {
-    width: '80%',
-    marginLeft: 'auto',
-    marginRight: 'auto',
-    backgroundColor: '#fff',
-    // height: 75,
-    // borderRadius: 8,
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingVertical: 20,
-  },
-});
 const MainList = ({section, navigation}) => {
+  const styles = StyleSheet.create({
+    card: {
+      width: 150,
+      height: 150,
+      // marginLeft: 'auto',
+      // marginRight: 'auto',
+      backgroundColor: '#fff',
+      borderWidth: 1,
+      // height: 75,
+      borderRadius: 8,
+      backgroundColor: section.color,
+      alignItems: 'center',
+      justifyContent: 'center',
+      // paddingVertical: 20,
+    },
+  });
   return (
-    <>
-      <TouchableOpacity
-        style={styles.card}
-        onPress={() => navigation.navigate(section.screenName)}>
-        <Text style={{color: '#000'}}>{section.name}</Text>
-      </TouchableOpacity>
-      <Ruler />
-    </>
+    <TouchableOpacity
+      style={styles.card}
+      onPress={() => navigation.navigate(section.screenName)}>
+      <Text style={{color: '#fff'}}>{section.name}</Text>
+    </TouchableOpacity>
   );
 };
 
