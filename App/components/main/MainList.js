@@ -1,6 +1,6 @@
 import React from 'react';
 import {Text, StyleSheet, TouchableOpacity} from 'react-native';
-
+import DynamicIcon from '../../common/DynamicIcon';
 const MainList = ({section, navigation}) => {
   const styles = StyleSheet.create({
     card: {
@@ -22,7 +22,13 @@ const MainList = ({section, navigation}) => {
     <TouchableOpacity
       style={styles.card}
       onPress={() => navigation.navigate(section.screenName)}>
-      <Text style={{color: '#fff'}}>{section.name}</Text>
+      <DynamicIcon
+        family={section.family}
+        name={section.icon}
+        color="#fff"
+        size={30}
+      />
+      <Text style={{color: '#fff', marginTop: 8}}>{section.name}</Text>
     </TouchableOpacity>
   );
 };

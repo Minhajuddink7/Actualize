@@ -2,7 +2,13 @@ import React from 'react';
 import {View, StyleSheet, SafeAreaView} from 'react-native';
 import commonStyles from '../common/commonStyles';
 import MainList from '../components/main/MainList';
-const {themeColor} = commonStyles();
+const {
+  themeColor,
+  introspectionColor: iColor,
+  transcendenceColor: tColor,
+  lifePurposeColor: lpColor,
+  hobbiesColor: hColor,
+} = commonStyles();
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -18,11 +24,34 @@ const Home = ({navigation}) => {
       id: 1,
       name: 'Introspection',
       screenName: 'Introspection',
-      color: 'purple',
+      color: iColor,
+      icon: 'notebook',
+      family: 'MaterialCommunityIcons',
     },
-    {id: 2, name: 'Transcendence', screenName: 'Transcendence', color: 'blue'},
-    {id: 3, name: 'Life Purpose', screenName: 'LifePurpose', color: 'red'},
-    {id: 4, name: 'Hobbies', screenName: 'Hobbies', color: 'green'},
+    {
+      id: 2,
+      name: 'Transcendence',
+      screenName: 'Transcendence',
+      color: tColor,
+      icon: 'heartbeat',
+      family: 'FontAwesome5',
+    },
+    {
+      id: 3,
+      name: 'Life Purpose',
+      screenName: 'LifePurpose',
+      color: lpColor,
+      icon: 'hand-holding-heart',
+      family: 'FontAwesome5',
+    },
+    {
+      id: 4,
+      name: 'Hobbies',
+      screenName: 'Hobbies',
+      color: hColor,
+      family: 'FontAwesome',
+      icon: 'magic',
+    },
   ];
   return (
     <SafeAreaView style={styles.container}>

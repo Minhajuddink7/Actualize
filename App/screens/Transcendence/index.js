@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
 const Transcendence = () => {
   return (
     <View style={styles.container}>
-      <Header text="Introspection" />
+      <Header text="Transcendence" />
     </View>
   );
 };
