@@ -59,7 +59,12 @@ const Introspection = ({navigation}) => {
                   size={25}
                   color={iColor}
                 />
-                <Text>{section.name}</Text>
+                <Text
+                  style={{
+                    fontFamily: 'DancingScript-Bold',
+                  }}>
+                  {section.name}
+                </Text>
               </TouchableOpacity>
             );
           })

@@ -7,9 +7,8 @@ const styles = StyleSheet.create({
     fontSize: 24,
     textAlign: 'center',
     marginTop: 30,
-    textDecorationLine: 'underline',
-    fontStyle: 'italic',
-    fontWeight: '700',
+    // textDecorationLine: 'underline',
+    fontFamily: 'Roboto-Bold',
   },
 });
 

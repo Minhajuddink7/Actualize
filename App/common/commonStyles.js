@@ -3,8 +3,8 @@ const commonStyles = () => {
     themeColor: '#002234',
     introspectionColor: '#1F4788',
     transcendenceColor: '#A77B06',
-    lifePurposeColor: '#E21717',
-    hobbiesColor: '#1FAA59',
+    lifePurposeColor: '#6A1B4D',
+    hobbiesColor: '#1C8D73',
     alignHorizontal: {flexDirection: 'row', alignItems: 'center'},
   };
 };
