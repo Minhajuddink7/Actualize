@@ -1,9 +1,10 @@
 import React, {useState} from 'react';
-import {View, Text, StyleSheet, TextInput, ToastAndroid} from 'react-native';
+import {View, Text, StyleSheet} from 'react-native';
 import SmoothPinCodeInput from 'react-native-smooth-pincode-input';
 import {useDispatch} from 'react-redux';
 import {changeUserState} from '../actions/CommonActions';
 import commonStyles from '../common/commonStyles';
+import showToast from '../common/showToast';
 
 const styles = StyleSheet.create({
   container: {
@@ -12,7 +13,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const EnterPin = ({navigation}) => {
+const EnterPin = () => {
   const dispatch = useDispatch();
   //states
   const [pin, setPin] = useState('');
@@ -22,27 +23,13 @@ const EnterPin = ({navigation}) => {
     if (code === '0671') {
       dispatch(changeUserState(true));
     } else {
-      ToastAndroid.showWithGravity(
-        'Invalid PIN Entered!',
-        ToastAndroid.SHORT,
-        ToastAndroid.CENTER,
-      );
+      showToast('Invalid PIN Entered!');
       setPin('');
     }
   };
 
   return (
     <View style={styles.container}>
-      {/* <TextInput
-        keyboardType="numeric"
-        placeholder="Enter Your Pin"
-        placeholderTextColor="#000"
-        maxLength={4}
-        style={{color: 'black', fontFamily: 'DancingScript-Bold'}}
-        onChangeText={text => {
-          if (text === '0671') navigation.navigate('Home');
-        }}
-      /> */}
       <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
         <Text
           style={{
