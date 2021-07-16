@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
   },
   card: {
     backgroundColor: '#fff',
-    width: '40%',
+    width: '45%',
     marginBottom: 20,
     justifyContent: 'center',
     alignItems: 'center',
@@ -36,11 +36,10 @@ const Introspection = ({navigation}) => {
   ];
   return (
     <View style={container}>
-      <Header text="Introspection" />
-      {/* <Todos /> */}
+      <Header text="Introspection" color={iColor} />
       <View
         style={{
-          marginHorizontal: '10%',
+          marginHorizontal: '6%',
           flexDirection: 'row',
           justifyContent: 'space-between',
           marginTop: 50,
@@ -62,6 +61,7 @@ const Introspection = ({navigation}) => {
                 <Text
                   style={{
                     fontFamily: 'DancingScript-Bold',
+                    fontSize: 18,
                   }}>
                   {section.name}
                 </Text>
@@ -74,12 +74,12 @@ const Introspection = ({navigation}) => {
           <Notes />
         )}
       </View>
-      <View style={{marginLeft: '10%', flex: 1}}>
+      <View style={{marginLeft: '6%', flex: 1}}>
         <TouchableOpacity
           style={[
             alignHorizontal,
             {
-              width: 150,
+              width: 170,
               height: 50,
               backgroundColor: '#758283',
               marginTop: 'auto',
@@ -94,12 +94,20 @@ const Introspection = ({navigation}) => {
             else setScreenState('initial');
           }}>
           <DynamicIcon
-            family="Entypo"
+            family="FontAwesome5"
             name="chevron-left"
             size={20}
             color="#fff"
           />
-          <Text style={{color: '#fff'}}>Back</Text>
+          <Text
+            style={{
+              color: '#fff',
+              fontFamily: 'DancingScript-Bold',
+              fontSize: 16,
+              marginLeft: 10,
+            }}>
+            Back
+          </Text>
         </TouchableOpacity>
       </View>
     </View>

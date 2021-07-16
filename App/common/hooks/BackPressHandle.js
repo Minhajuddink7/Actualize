@@ -7,6 +7,7 @@ export const useDoubleBackPressExit = exitHandler => {
     if (currentCount === 1) {
       exitHandler();
       subscription.remove();
+      BackHandler.exitApp();
       return true;
     }
     backPressHandler();

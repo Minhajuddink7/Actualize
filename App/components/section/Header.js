@@ -1,19 +1,39 @@
 import React from 'react';
-import {Text, StyleSheet} from 'react-native';
-
+import {Text, StyleSheet, View, TouchableOpacity} from 'react-native';
+import DynamicIcon from '../../common/DynamicIcon';
 const styles = StyleSheet.create({
   header: {
+    marginRight: 15,
     color: '#fff',
     fontSize: 24,
-    textAlign: 'center',
-    marginTop: 30,
-    // textDecorationLine: 'underline',
-    fontFamily: 'Roboto-Bold',
+    fontFamily: 'DancingScript-Bold',
   },
 });
 
-const Header = ({text}) => {
-  return <Text style={styles.header}>{text}</Text>;
+const Header = ({text, color}) => {
+  return (
+    <View
+      style={{
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginTop: 30,
+        justifyContent: 'center',
+      }}>
+      <Text style={styles.header}>{text}</Text>
+      <TouchableOpacity
+        style={{
+          height: 35,
+          width: 35,
+          borderRadius: 8,
+          justifyContent: 'center',
+          alignItems: 'center',
+          backgroundColor: color,
+          marginTop: 7,
+        }}>
+        <DynamicIcon family="MaterialIcons" name="add" color="#fff" size={20} />
+      </TouchableOpacity>
+    </View>
+  );
 };
 
 export default Header;

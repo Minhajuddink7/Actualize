@@ -28,7 +28,15 @@ const MainList = ({section, navigation}) => {
         color="#fff"
         size={30}
       />
-      <Text style={{color: '#fff', marginTop: 8}}>{section.name}</Text>
+      <Text
+        style={{
+          color: '#fff',
+          marginTop: 8,
+          fontFamily: 'DancingScript-Bold',
+          fontSize: 18,
+        }}>
+        {section.name}
+      </Text>
     </TouchableOpacity>
   );
 };

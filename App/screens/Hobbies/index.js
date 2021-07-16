@@ -2,7 +2,7 @@ import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import commonStyles from '../../common/commonStyles';
 import Header from '../../components/section/Header';
-const {themeColor} = commonStyles();
+const {themeColor, hobbiesColor: hColor} = commonStyles();
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
 const Hobbies = () => {
   return (
     <View style={styles.container}>
-      <Header text="Hobbies" />
+      <Header text="Hobbies" color={hColor} />
     </View>
   );
 };
