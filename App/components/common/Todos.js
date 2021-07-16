@@ -15,51 +15,6 @@ const Todos = () => {
     {title: 'Complete your current book', completed: false},
     {title: 'Learn flutter and dart', completed: true},
     {title: 'Learn firebase and firestore from fireship', completed: false},
-    {title: 'Learn firebase and firestore from fireship', completed: false},
-    {title: 'Learn firebase and firestore from fireship', completed: true},
-    {title: 'Learn firebase and firestore from fireship', completed: false},
-    {title: 'Learn firebase and firestore from fireship', completed: false},
-    {title: 'Learn firebase and firestore from fireship', completed: false},
-    {title: 'Learn firebase and firestore from fireship', completed: false},
-    {title: 'Learn firebase and firestore from fireship', completed: false},
-    {title: 'Learn firebase and firestore from fireship', completed: false},
-    {title: 'Learn firebase and firestore from fireship', completed: false},
-    {title: 'Learn firebase and firestore from fireship', completed: false},
-    {title: 'Learn firebase and firestore from fireship', completed: false},
-    {title: 'Learn firebase and firestore from fireship', completed: false},
-    {title: 'Learn firebase and firestore from fireship', completed: false},
-    {title: 'Learn firebase and firestore from fireship', completed: false},
-    {title: 'Learn firebase and firestore from fireship', completed: false},
-    {title: 'Learn firebase and firestore from fireship', completed: false},
-    {title: 'Learn firebase and firestore from fireship', completed: false},
-    {title: 'Learn firebase and firestore from fireship', completed: false},
-    {title: 'Learn firebase and firestore from fireship', completed: false},
-    {title: 'Learn firebase and firestore from fireship', completed: false},
-    {title: 'Learn firebase and firestore from fireship', completed: false},
-    {title: 'Learn firebase and firestore from fireship', completed: false},
-    {title: 'Learn firebase and firestore from fireship', completed: false},
-    {title: 'Learn firebase and firestore from fireship', completed: false},
-    {title: 'Learn firebase and firestore from fireship', completed: false},
-    {title: 'Learn firebase and firestore from fireship', completed: false},
-    {title: 'Learn firebase and firestore from fireship', completed: false},
-    {title: 'Learn firebase and firestore from fireship', completed: false},
-    {title: 'Learn firebase and firestore from fireship', completed: false},
-    {title: 'Learn firebase and firestore from fireship', completed: false},
-    {title: 'Learn firebase and firestore from fireship', completed: false},
-    {title: 'Learn firebase and firestore from fireship', completed: false},
-    {title: 'Learn firebase and firestore from fireship', completed: false},
-    {title: 'Learn firebase and firestore from fireship', completed: false},
-    {title: 'Learn firebase and firestore from fireship', completed: false},
-    {title: 'Learn firebase and firestore from fireship', completed: false},
-    {title: 'Learn firebase and firestore from fireship', completed: false},
-    {title: 'Learn firebase and firestore from fireship', completed: false},
-    {title: 'Learn firebase and firestore from fireship', completed: false},
-    {title: 'Learn firebase and firestore from fireship', completed: false},
-    {title: 'Learn firebase and firestore from fireship', completed: false},
-    {title: 'Learn firebase and firestore from fireship', completed: false},
-    {title: 'Learn firebase and firestore from fireship', completed: false},
-    {title: 'Learn firebase and firestore from fireship', completed: false},
-    {title: 'Learn firebase and firestore from fireship', completed: false},
   ]);
   return (
     <View style={styles.container}>
@@ -72,7 +27,7 @@ const Todos = () => {
         }}>
         Todos
       </Text>
-      <View style={{maxHeight: 500}}>
+      <View style={{maxHeight: '70%'}}>
         <ScrollView>
           {todos.map((todo, i) => {
             return (

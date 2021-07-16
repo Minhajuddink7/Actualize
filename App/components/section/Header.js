@@ -10,13 +10,13 @@ const styles = StyleSheet.create({
   },
 });
 
-const Header = ({text, color}) => {
+const Header = ({text, color, setModalOpen}) => {
   return (
     <View
       style={{
         flexDirection: 'row',
         alignItems: 'center',
-        marginTop: 30,
+        marginVertical: 30,
         justifyContent: 'center',
       }}>
       <Text style={styles.header}>{text}</Text>
@@ -29,7 +29,8 @@ const Header = ({text, color}) => {
           alignItems: 'center',
           backgroundColor: color,
           marginTop: 7,
-        }}>
+        }}
+        onPress={() => setModalOpen(true)}>
         <DynamicIcon family="MaterialIcons" name="add" color="#fff" size={20} />
       </TouchableOpacity>
     </View>
