@@ -12,9 +12,10 @@ import DynamicIcon from '../../common/DynamicIcon';
 import Notes from '../../components/common/Notes';
 import Todos from '../../components/common/Todos';
 import Header from '../../components/section/Header';
-import Modal from 'react-native-modal';
 import BottomModal from '../../components/common/BottomModal';
 import showToast from '../../common/showToast';
+import {useDispatch} from 'react-redux';
+import {changeIntrospection} from '../../actions/SectionsActions';
 const {
   themeColor,
   alignHorizontal,
@@ -38,11 +39,12 @@ const styles = StyleSheet.create({
 });
 
 const Introspection = ({navigation}) => {
+  const dispatch = useDispatch();
   const {card, container} = styles;
   const [screenState, setScreenState] = useState('initial');
   const [modalOpen, setModalOpen] = useState(false);
 
-  const SECTIONS = [
+  const OPTIONS = [
     {name: 'Todos', family: 'FontAwesome5', icon: 'th-list'},
     {name: 'Notes', family: 'FontAwesome', icon: 'sticky-note'},
     {name: 'Quotes', family: 'MaterialCommunityIcons', icon: 'comment-quote'},
@@ -61,11 +63,16 @@ const Introspection = ({navigation}) => {
     } else if (!widgetName) {
       showToast('Enter the name of the widget!');
     } else {
-      const section = SECTIONS.find(s => s.name === selectedWidget);
+      const section = OPTIONS.find(s => s.name === selectedWidget);
       setWidgets(old => {
         return [
           ...old,
-          {name: widgetName, family: section.family, icon: section.icon},
+          {
+            name: widgetName,
+            family: section.family,
+            icon: section.icon,
+            selectedWidget,
+          },
         ];
       });
       setModalOpen(false);
@@ -74,9 +81,19 @@ const Introspection = ({navigation}) => {
     }
   };
 
+  //effects
+
   return (
     <View style={container}>
-      <Header text="Introspection" color={iColor} setModalOpen={setModalOpen} />
+      {screenState === 'initial' ? (
+        <Header
+          text="Introspection"
+          color={iColor}
+          setModalOpen={setModalOpen}
+        />
+      ) : (
+        <Header text={screenState} color={iColor} setModalOpen={setModalOpen} />
+      )}
       <View style={{height: '70%'}}>
         <ScrollView>
           <View
@@ -93,7 +110,7 @@ const Introspection = ({navigation}) => {
                   <TouchableOpacity
                     style={card}
                     key={i}
-                    onPress={() => setScreenState(section.name)}>
+                    onPress={() => setScreenState(section.selectedWidget)}>
                     <DynamicIcon
                       family={section.family}
                       name={section.icon}
@@ -167,7 +184,7 @@ const Introspection = ({navigation}) => {
             Choose Widget Type :
           </Text>
           <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-            {SECTIONS.map((section, i) => {
+            {OPTIONS.map((section, i) => {
               const widgetChoosen = section.name === selectedWidget;
               return (
                 <TouchableOpacity
@@ -211,8 +228,13 @@ const Introspection = ({navigation}) => {
               paddingLeft: 10,
             }}>
             <TextInput
-              style={{fontFamily: 'DancingScript-Regular', width: '100%'}}
+              style={{
+                fontFamily: 'DancingScript-Regular',
+                width: '100%',
+                color: '#000',
+              }}
               placeholder="Name of the Widget"
+              placeholderTextColor="#666"
               value={widgetName}
               onChangeText={text => setWidgetName(text)}
             />

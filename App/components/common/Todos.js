@@ -15,19 +15,13 @@ const Todos = () => {
     {title: 'Complete your current book', completed: false},
     {title: 'Learn flutter and dart', completed: true},
     {title: 'Learn firebase and firestore from fireship', completed: false},
+    {title: 'Learn firebase and firestore from fireship', completed: false},
+    {title: 'Learn firebase and firestore from fireship', completed: false},
+    {title: 'Learn firebase and firestore from fireship', completed: false},
   ]);
   return (
     <View style={styles.container}>
-      <Text
-        style={{
-          textAlign: 'center',
-          fontSize: 20,
-          marginVertical: 15,
-          fontFamily: 'DancingScript-Bold',
-        }}>
-        Todos
-      </Text>
-      <View style={{maxHeight: '70%'}}>
+      <View>
         <ScrollView>
           {todos.map((todo, i) => {
             return (
