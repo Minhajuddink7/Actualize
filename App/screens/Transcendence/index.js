@@ -1,20 +1,18 @@
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {useSelector} from 'react-redux';
 import commonStyles from '../../common/commonStyles';
-import Header from '../../components/section/Header';
-const {themeColor, transcendenceColor: tColor} = commonStyles();
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: themeColor,
-  },
-});
+import Section from '../Section';
 
-const Transcendence = () => {
+const Transcendence = ({navigation}) => {
+  const {transcendenceColor} = commonStyles();
+  const tWidgets = useSelector(state => state.sections.transcendence);
   return (
-    <View style={styles.container}>
-      <Header text="Transcendence" color={tColor} />
-    </View>
+    <Section
+      navigation={navigation}
+      widgets={tWidgets}
+      name="Transcendence"
+      color={transcendenceColor}
+    />
   );
 };
 

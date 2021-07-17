@@ -1,20 +1,18 @@
 import React from 'react';
-import {View, StyleSheet} from 'react-native';
+import {useSelector} from 'react-redux';
 import commonStyles from '../../common/commonStyles';
-import Header from '../../components/section/Header';
-const {themeColor, lifePurposeColor: lpColor} = commonStyles();
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: themeColor,
-  },
-});
+import Section from '../Section';
 
-const LifePurpose = () => {
+const LifePurpose = ({navigation}) => {
+  const widgets = useSelector(state => state.sections.lifePurpose);
+  const {lifePurposeColor} = commonStyles();
   return (
-    <View style={styles.container}>
-      <Header text="Life Purpose" color={lpColor} />
-    </View>
+    <Section
+      navigation={navigation}
+      widgets={widgets}
+      name="Life Purpose"
+      color={lifePurposeColor}
+    />
   );
 };
 

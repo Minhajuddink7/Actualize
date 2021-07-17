@@ -1,20 +1,18 @@
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {useSelector} from 'react-redux';
 import commonStyles from '../../common/commonStyles';
-import Header from '../../components/section/Header';
-const {themeColor, hobbiesColor: hColor} = commonStyles();
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: themeColor,
-  },
-});
+import Section from '../Section';
 
-const Hobbies = () => {
+const Hobbies = ({navigation}) => {
+  const widgets = useSelector(state => state.sections.hobbies);
+  const {hobbiesColor} = commonStyles();
   return (
-    <View style={styles.container}>
-      <Header text="Hobbies" color={hColor} />
-    </View>
+    <Section
+      navigation={navigation}
+      widgets={widgets}
+      name="Hobbies"
+      color={hobbiesColor}
+    />
   );
 };
 

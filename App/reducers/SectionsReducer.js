@@ -1,7 +1,7 @@
 import {ACTIONS} from '../actions/SectionsActions';
 
 const INITIAL_STATE = {
-  introspection: {widgets: []},
+  introspection: [],
   transcendence: [],
   lifePurpose: [],
   hobbies: [],
