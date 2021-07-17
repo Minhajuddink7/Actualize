@@ -35,10 +35,10 @@ const EnterPin = () => {
           style={{
             fontSize: 25,
             color: '#fff',
-            fontFamily: 'DancingScript-Bold',
+            fontFamily: 'Poppins-Italic',
             marginBottom: 50,
           }}>
-          Enter You PIN Below:
+          Enter Your PIN Below
         </Text>
         <SmoothPinCodeInput
           autoFocus
@@ -47,11 +47,9 @@ const EnterPin = () => {
             borderColor: '#bbb',
             marginRight: 5,
           }}
-          cellStyleFocused={
-            {
-              // borderColor: color,
-            }
-          }
+          cellStyleFocused={{
+            borderColor: '#002B9B',
+          }}
           password={true}
           value={pin}
           onTextChange={code => {

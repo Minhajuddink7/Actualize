@@ -47,8 +47,9 @@ const Section = ({navigation, widgets, name, color}) => {
   const [modalOpen, setModalOpen] = useState(false);
 
   const OPTIONS = [
-    {name: 'Todos', family: 'FontAwesome5', icon: 'th-list'},
+    {name: 'Todos', family: 'Octicons', icon: 'checklist'},
     {name: 'Notes', family: 'FontAwesome', icon: 'sticky-note'},
+    {name: 'Lists', family: 'FontAwesome5', icon: 'clipboard-list'},
     {name: 'Quotes', family: 'MaterialCommunityIcons', icon: 'comment-quote'},
     {name: 'Timer', family: 'MaterialCommunityIcons', icon: 'clock-time-seven'},
     {name: 'Visualize', family: 'Ionicons', icon: 'eye'},
@@ -99,10 +100,6 @@ const Section = ({navigation, widgets, name, color}) => {
 
   //effects
 
-  useEffect(() => {
-    console.log('ss', screenState);
-  }, [screenState]);
-
   return (
     <View style={container}>
       {screenState === 'initial' ? (
@@ -140,7 +137,7 @@ const Section = ({navigation, widgets, name, color}) => {
                       <DynamicIcon
                         family="MaterialIcons"
                         name="more-vert"
-                        size={30}
+                        size={25}
                         color={color}
                       />
                     </TouchableOpacity>
@@ -149,7 +146,7 @@ const Section = ({navigation, widgets, name, color}) => {
                       <DynamicIcon
                         family="MaterialIcons"
                         name="delete"
-                        size={30}
+                        size={25}
                         color={color}
                       />
                     </TouchableOpacity>
@@ -172,7 +169,15 @@ const Section = ({navigation, widgets, name, color}) => {
           </View>
         </ScrollView>
       </View>
-      <View style={{marginLeft: '6%', flex: 1}}>
+      <View
+        style={{
+          marginHorizontal: '6%',
+          flex: 1,
+          justifyContent: 'space-between',
+          flexDirection: 'row',
+          alignItems: 'flex-end',
+          marginBottom: 30,
+        }}>
         <TouchableOpacity
           style={[
             alignHorizontal,
@@ -181,7 +186,7 @@ const Section = ({navigation, widgets, name, color}) => {
               height: 50,
               backgroundColor: '#758283',
               marginTop: 'auto',
-              marginBottom: 30,
+
               justifyContent: 'center',
               alignItems: 'center',
               borderRadius: 8,
@@ -207,6 +212,17 @@ const Section = ({navigation, widgets, name, color}) => {
             Back
           </Text>
         </TouchableOpacity>
+        <TouchableOpacity
+          style={{
+            height: 50,
+            width: 50,
+            backgroundColor: {color},
+            borderRadius: 50,
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}>
+          <DynamicIcon color="#fff" family="Entypo" name="plus" size={30} />
+        </TouchableOpacity>
       </View>
       {/* {modalOpen ? ( */}
 
@@ -215,6 +231,7 @@ const Section = ({navigation, widgets, name, color}) => {
           <Text
             style={{
               marginVertical: 10,
+              // fontFamily: 'Roboto-Regular',
               fontFamily: 'DancingScript-SemiBold',
               fontSize: 22,
             }}>
@@ -241,12 +258,14 @@ const Section = ({navigation, widgets, name, color}) => {
                   <DynamicIcon
                     family={section.family}
                     name={section.icon}
-                    size={10}
+                    size={20}
                     color={widgetChoosen ? '#fff' : color}
                   />
                   <Text
                     style={{
                       fontFamily: 'DancingScript-SemiBold',
+                      // fontFamily: 'Poppins-Regular',
+
                       marginLeft: 10,
                       color: widgetChoosen ? '#fff' : color,
                     }}>

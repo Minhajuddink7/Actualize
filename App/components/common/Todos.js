@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {View, Text, StyleSheet, ScrollView} from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
+import uuid from 'react-native-uuid';
 
 const styles = StyleSheet.create({
   container: {
@@ -19,6 +20,8 @@ const Todos = () => {
     {title: 'Learn firebase and firestore from fireship', completed: false},
     {title: 'Learn firebase and firestore from fireship', completed: false},
   ]);
+  console.log('Random id: ', uuid.v4());
+
   return (
     <View style={styles.container}>
       <View>

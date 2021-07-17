@@ -7,6 +7,7 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontSize: 24,
     fontFamily: 'DancingScript-Bold',
+    // fontFamily: 'Montserrat-SemiBold',
   },
 });
 
