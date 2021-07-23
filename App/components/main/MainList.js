@@ -2,6 +2,24 @@ import React from 'react';
 import {Text, StyleSheet, TouchableOpacity} from 'react-native';
 import DynamicIcon from '../../common/DynamicIcon';
 const MainList = ({section, navigation}) => {
+  let borderRadiusStyes = {};
+  switch (section.id) {
+    case 1:
+      borderRadiusStyes = {borderTopLeftRadius: 20};
+      break;
+    case 2:
+      borderRadiusStyes = {borderTopRightRadius: 20};
+      break;
+    case 3:
+      borderRadiusStyes = {borderBottomLeftRadius: 20};
+      break;
+    case 4:
+      borderRadiusStyes = {borderBottomRightRadius: 20};
+      break;
+
+    default:
+      break;
+  }
   const styles = StyleSheet.create({
     card: {
       width: 150,
@@ -9,10 +27,12 @@ const MainList = ({section, navigation}) => {
       // marginLeft: 'auto',
       // marginRight: 'auto',
       backgroundColor: '#fff',
-      borderWidth: 1,
+      ...borderRadiusStyes,
+      // borderWidth: 1,
       // height: 75,
-      borderRadius: 8,
+      // borderRadius: 20,
       backgroundColor: section.color,
+
       alignItems: 'center',
       justifyContent: 'center',
       // paddingVertical: 20,

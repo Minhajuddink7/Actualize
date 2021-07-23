@@ -1,6 +1,6 @@
 import React from 'react';
-import {Text, StyleSheet, View, TouchableOpacity} from 'react-native';
-import DynamicIcon from '../../common/DynamicIcon';
+import {Text, StyleSheet, View} from 'react-native';
+
 const styles = StyleSheet.create({
   header: {
     marginRight: 15,
@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const Header = ({text, color, setModalOpen}) => {
+const Header = ({text}) => {
   return (
     <View
       style={{
@@ -21,19 +21,6 @@ const Header = ({text, color, setModalOpen}) => {
         justifyContent: 'center',
       }}>
       <Text style={styles.header}>{text}</Text>
-      <TouchableOpacity
-        style={{
-          height: 35,
-          width: 35,
-          borderRadius: 8,
-          justifyContent: 'center',
-          alignItems: 'center',
-          backgroundColor: color,
-          marginTop: 7,
-        }}
-        onPress={() => setModalOpen(true)}>
-        <DynamicIcon family="MaterialIcons" name="add" color="#fff" size={20} />
-      </TouchableOpacity>
     </View>
   );
 };

@@ -10,6 +10,8 @@ import EnterPin from '../screens/EnterPin';
 import {useDispatch, useSelector} from 'react-redux';
 // import {useDoubleBackPressExit} from '../common/hooks/BackPressHandle';
 import {changeUserState} from '../actions/CommonActions';
+import Widget from '../screens/Widget';
+import WidgetScreen from '../screens/WidgetScreen';
 const MainNavigation = () => {
   const isLoggedIn = useSelector(state => state.common.isLoggedIn);
   // const dispatch = useDispatch();
@@ -25,6 +27,7 @@ const MainNavigation = () => {
             headerShown: false,
           }}>
           <Stack.Screen name="Home" component={Home} />
+          <Stack.Screen name="WidgetScreen" component={WidgetScreen} />
           <Stack.Screen name="Introspection" component={Introspection} />
           <Stack.Screen name="Transcendence" component={Transcendence} />
           <Stack.Screen name="LifePurpose" component={LifePurpose} />

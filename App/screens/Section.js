@@ -21,13 +21,15 @@ import {
   changeLifePurpose,
   changeTranscendence,
 } from '../actions/SectionsActions';
+import uuid from 'react-native-uuid';
+import ConfirmModal from '../components/common/ConfirmModal';
+import NormalModal from '../components/common/NormalModal';
+import Widget from './Widget';
+import Layout from './Layout';
+import BottomNav from '../common/BottomNav';
 
-const {themeColor, alignHorizontal} = commonStyles();
+const {themeColor, alignHorizontal, blackColor, redColor} = commonStyles();
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: themeColor,
-  },
   card: {
     backgroundColor: '#fff',
     width: '45%',
@@ -38,17 +40,25 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     // elevation: 5,
   },
+  actionButton: {
+    borderRadius: 10,
+    width: 40,
+    height: 40,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
 });
-
 const Section = ({navigation, widgets, name, color}) => {
   const dispatch = useDispatch();
   const {card, container} = styles;
   const [screenState, setScreenState] = useState('initial');
   const [modalOpen, setModalOpen] = useState(false);
+  const [confirmModalOpen, setConfirmModalOpen] = useState(false);
+  const [deleteId, setDeleteId] = useState();
 
   const OPTIONS = [
     {name: 'Todos', family: 'Octicons', icon: 'checklist'},
-    {name: 'Notes', family: 'FontAwesome', icon: 'sticky-note'},
+    {name: 'Notes', family: 'MaterialCommunityIcons', icon: 'notebook'},
     {name: 'Lists', family: 'FontAwesome5', icon: 'clipboard-list'},
     {name: 'Quotes', family: 'MaterialCommunityIcons', icon: 'comment-quote'},
     {name: 'Timer', family: 'MaterialCommunityIcons', icon: 'clock-time-seven'},
@@ -70,43 +80,48 @@ const Section = ({navigation, widgets, name, color}) => {
       const newWidgets = [
         ...widgets,
         {
+          id: uuid.v4(),
           name: widgetName,
           family: option.family,
           icon: option.icon,
           type: selectedWidget,
         },
       ];
-      switch (name) {
-        case 'Introspection':
-          dispatch(changeIntrospection(newWidgets));
-          break;
-        case 'Transcendence':
-          dispatch(changeTranscendence(newWidgets));
-          break;
-        case 'Life Purpose':
-          dispatch(changeLifePurpose(newWidgets));
-          break;
-        case 'Hobbies':
-          dispatch(changeHobbies(newWidgets));
-          break;
-        default:
-          break;
-      }
+      changeSection(newWidgets);
       setModalOpen(false);
       setSelectedWidget(null);
       setWidgetName(null);
     }
   };
 
-  //effects
+  const changeSection = newWidgets => {
+    switch (name) {
+      case 'Introspection':
+        dispatch(changeIntrospection(newWidgets));
+        break;
+      case 'Transcendence':
+        dispatch(changeTranscendence(newWidgets));
+        break;
+      case 'Life Purpose':
+        dispatch(changeLifePurpose(newWidgets));
+        break;
+      case 'Hobbies':
+        dispatch(changeHobbies(newWidgets));
+        break;
+      default:
+        break;
+    }
+  };
+
+  const deleteWidget = () => {
+    const newWidgets = widgets.filter(widget => widget.id !== deleteId);
+    changeSection(newWidgets);
+    setConfirmModalOpen(false);
+  };
 
   return (
-    <View style={container}>
-      {screenState === 'initial' ? (
-        <Header text={name} color={color} setModalOpen={setModalOpen} />
-      ) : (
-        <Header text={screenState} color={color} setModalOpen={setModalOpen} />
-      )}
+    <Layout>
+      <Header text={name} />
       <View style={{height: '70%'}}>
         <ScrollView>
           <View
@@ -118,112 +133,91 @@ const Section = ({navigation, widgets, name, color}) => {
               flexWrap: 'wrap',
             }}>
             {screenState === 'initial' ? (
-              widgets?.map((section, i) => {
+              widgets?.map((widget, i) => {
                 return (
                   <TouchableOpacity
                     style={card}
                     key={i}
-                    onPress={() => setScreenState(section.type)}>
-                    <View style={{marginTop: 20}}>
+                    onPress={() => {
+                      // setScreenState(widget.type);
+                      navigation.navigate('WidgetScreen', {
+                        type: widget.type,
+                        section: name,
+                        color,
+                        id: widget.id,
+                      });
+                    }}>
+                    <View
+                      style={{
+                        flexDirection: 'row',
+                        justifyContent: 'space-between',
+                        width: '100%',
+                        paddingHorizontal: 10,
+                        marginTop: -15,
+                      }}>
+                      <TouchableOpacity
+                        style={[
+                          styles.actionButton,
+                          // {backgroundColor: blackColor},
+                        ]}>
+                        <DynamicIcon
+                          family="MaterialIcons"
+                          name="more"
+                          size={25}
+                          // color="#fff"
+                          color={blackColor}
+                        />
+                      </TouchableOpacity>
+                      <TouchableOpacity
+                        style={[
+                          styles.actionButton,
+                          // {backgroundColor: redColor},
+                        ]}
+                        onPress={() => {
+                          setConfirmModalOpen(true);
+                          setDeleteId(widget.id);
+                        }}>
+                        <DynamicIcon
+                          family="MaterialIcons"
+                          name="delete"
+                          size={27}
+                          // color="#fff"
+                          color={redColor}
+                        />
+                      </TouchableOpacity>
+                    </View>
+                    <View style={{marginTop: 5}}>
                       <DynamicIcon
-                        family={section.family}
-                        name={section.icon}
+                        family={widget.family}
+                        name={widget.icon}
                         size={40}
                         color={color}
                       />
                     </View>
-                    <TouchableOpacity
-                      style={{position: 'absolute', top: 10, left: 10}}>
-                      <DynamicIcon
-                        family="MaterialIcons"
-                        name="more-vert"
-                        size={25}
-                        color={color}
-                      />
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                      style={{position: 'absolute', top: 10, right: 10}}>
-                      <DynamicIcon
-                        family="MaterialIcons"
-                        name="delete"
-                        size={25}
-                        color={color}
-                      />
-                    </TouchableOpacity>
+
                     <Text
                       style={{
                         fontFamily: 'DancingScript-Bold',
                         fontSize: 18,
                         marginHorizontal: 5,
                       }}>
-                      {section.name}
+                      {widget.name}
                     </Text>
                   </TouchableOpacity>
                 );
               })
-            ) : screenState === 'Todos' ? (
-              <Todos />
             ) : (
-              <Notes />
+              <Widget type={screenState} section={name} />
             )}
           </View>
         </ScrollView>
       </View>
-      <View
-        style={{
-          marginHorizontal: '6%',
-          flex: 1,
-          justifyContent: 'space-between',
-          flexDirection: 'row',
-          alignItems: 'flex-end',
-          marginBottom: 30,
-        }}>
-        <TouchableOpacity
-          style={[
-            alignHorizontal,
-            {
-              width: 170,
-              height: 50,
-              backgroundColor: '#758283',
-              marginTop: 'auto',
-
-              justifyContent: 'center',
-              alignItems: 'center',
-              borderRadius: 8,
-            },
-          ]}
-          onPress={() => {
-            if (screenState === 'initial') navigation.navigate('Home');
-            else setScreenState('initial');
-          }}>
-          <DynamicIcon
-            family="FontAwesome5"
-            name="chevron-left"
-            size={20}
-            color="#fff"
-          />
-          <Text
-            style={{
-              color: '#fff',
-              fontFamily: 'DancingScript-Bold',
-              fontSize: 16,
-              marginLeft: 10,
-            }}>
-            Back
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={{
-            height: 50,
-            width: 50,
-            backgroundColor: {color},
-            borderRadius: 50,
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}>
-          <DynamicIcon color="#fff" family="Entypo" name="plus" size={30} />
-        </TouchableOpacity>
-      </View>
+      <BottomNav
+        navigation={navigation}
+        color={color}
+        buttonText="Add Widget"
+        callback={() => setModalOpen(true)}
+      />
       {/* {modalOpen ? ( */}
 
       <BottomModal modalOpen={modalOpen} setModalOpen={setModalOpen}>
@@ -310,9 +304,19 @@ const Section = ({navigation, widgets, name, color}) => {
           </TouchableOpacity>
         </View>
       </BottomModal>
-
+      <NormalModal
+        modalOpen={confirmModalOpen}
+        setModalOpen={setConfirmModalOpen}>
+        <ConfirmModal
+          header="Delete Widget"
+          message="Are you sure you want to delete this widget?"
+          setModalOpen={setConfirmModalOpen}
+          callback={deleteWidget}
+          color={color}
+        />
+      </NormalModal>
       {/* ) : null} */}
-    </View>
+    </Layout>
   );
 };
 

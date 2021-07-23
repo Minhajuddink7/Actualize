@@ -11,7 +11,8 @@ const {
   transcendenceColor: tColor,
   lifePurposeColor: lpColor,
   hobbiesColor: hColor,
-  appColor,
+  // redColor,
+  blackColor,
 } = commonStyles();
 const styles = StyleSheet.create({
   container: {
@@ -31,7 +32,7 @@ const Home = ({navigation}) => {
       name: 'Introspection',
       screenName: 'Introspection',
       color: iColor,
-      icon: 'notebook',
+      icon: 'notebook-multiple',
       family: 'MaterialCommunityIcons',
     },
     {
@@ -80,7 +81,8 @@ const Home = ({navigation}) => {
         style={{
           height: 70,
           width: 70,
-          backgroundColor: '#c23616',
+          // backgroundColor: redColor,
+          backgroundColor: blackColor,
           position: 'absolute',
           bottom: 30,
           right: 30,
@@ -89,12 +91,7 @@ const Home = ({navigation}) => {
           alignItems: 'center',
         }}
         onPress={() => dispatch(changeUserState(false))}>
-        <DynamicIcon
-          color="#fff"
-          family="FontAwesome5"
-          name="power-off"
-          size={30}
-        />
+        <DynamicIcon color="#fff" family="Fontisto" name="locked" size={26} />
       </TouchableOpacity>
     </SafeAreaView>
   );

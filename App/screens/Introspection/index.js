@@ -5,6 +5,7 @@ import Section from '../Section';
 
 const Introspection = ({navigation}) => {
   const iWidgets = useSelector(state => state.sections.introspection);
+
   const {introspectionColor} = commonStyles();
   return (
     <Section
