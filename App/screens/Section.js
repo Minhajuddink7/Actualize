@@ -141,7 +141,8 @@ const Section = ({navigation, widgets, name, color}) => {
                     onPress={() => {
                       // setScreenState(widget.type);
                       navigation.navigate('WidgetScreen', {
-                        type: widget.type,
+                        // type: widget.type,
+                        widget,
                         section: name,
                         color,
                         id: widget.id,

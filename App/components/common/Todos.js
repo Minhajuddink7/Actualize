@@ -6,13 +6,15 @@ import {
   ScrollView,
   TextInput,
   TouchableOpacity,
+  Alert,
 } from 'react-native';
 import uuid from 'react-native-uuid';
 import {useDispatch, useSelector} from 'react-redux';
 import {changeWidgetFormState} from '../../actions/CommonActions';
-import {addTodos, toggleTodo} from '../../actions/TodoActions';
+import {addTodos, deleteTodo, toggleTodo} from '../../actions/TodoActions';
 import BottomNav from '../../common/BottomNav';
 import commonStyles from '../../common/commonStyles';
+import DynamicIcon from '../../common/DynamicIcon';
 import showToast from '../../common/showToast';
 import Header from '../section/Header';
 import BottomModal from './BottomModal';
@@ -27,7 +29,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const Todos = ({section, id, navigation}) => {
+const Todos = ({section, name, id, navigation}) => {
   const {
     introspectionColor,
     transcendenceColor,
@@ -53,7 +55,8 @@ const Todos = ({section, id, navigation}) => {
   }
 
   // console.log('sss: ', section);
-  const todos = useSelector(state => state.todos);
+  const todos = useSelector(state => state.todos.todos);
+  const widgetTodos = todos.filter(t => t.widget_id === id);
   const [todo, setTodo] = useState();
   const dispatchRedux = useDispatch();
   const widgetFormOpen = useSelector(state => state.common.widgetFormOpen);
@@ -67,44 +70,61 @@ const Todos = ({section, id, navigation}) => {
         id: uuid.v4(),
         title: todo,
         completed: false,
+        widget_id: id,
       }),
     );
+    setTodo('');
     closeModal();
   };
-  const toggleState = completed => {
-    // dispatchRedux(toggleTodo({}));
-    console.log(completed);
+  const toggleTodoState = todo => {
+    const newTodo = {...todo, completed: !todo.completed};
+    dispatchRedux(toggleTodo(newTodo));
+  };
+  const deleteTodoFromList = todo => {
+    dispatchRedux(deleteTodo(todo));
   };
   return (
     <View>
-      <Header text="Todos" />
+      <Header text={name} />
       <View style={styles.container}>
         <ScrollView>
-          {todos?.map((todo, i) => {
+          {widgetTodos?.map((todo, i) => {
             return (
-              <TouchableOpacity
+              <View
                 style={{
                   flexDirection: 'row',
                   alignItems: 'center',
                   paddingVertical: 10,
                   paddingHorizontal: 20,
                   borderTopWidth: 0.5,
+                  justifyContent: 'space-between',
                 }}
-                key={i}
-                onPress={() => toggleState(todo.completed)}>
-                <Text
-                  key={i}
-                  style={{
-                    fontSize: 18,
-                    fontFamily: 'DancingScript-SemiBold',
-                    color: todo.completed ? '#ccc' : '#000',
-                    textDecorationLine: todo.completed
-                      ? 'line-through'
-                      : 'none',
-                  }}>
-                  {todo.title}
-                </Text>
-              </TouchableOpacity>
+                key={i}>
+                <TouchableOpacity
+                  style={{flex: 1}}
+                  onPress={() => toggleTodoState(todo)}>
+                  <Text
+                    key={i}
+                    style={{
+                      fontSize: 18,
+                      fontFamily: 'DancingScript-SemiBold',
+                      color: todo.completed ? '#ccc' : '#000',
+                      textDecorationLine: todo.completed
+                        ? 'line-through'
+                        : 'none',
+                    }}>
+                    {todo.title}
+                  </Text>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => deleteTodoFromList(todo)}>
+                  <DynamicIcon
+                    family="MaterialIcons"
+                    name="delete"
+                    size={22}
+                    color={color}
+                  />
+                </TouchableOpacity>
+              </View>
             );
           })}
         </ScrollView>

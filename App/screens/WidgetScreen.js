@@ -6,12 +6,17 @@ import Layout from './Layout';
 import Widget from './Widget';
 
 const WidgetScreen = ({navigation, route}) => {
-  const {type, section, color, id} = route.params;
+  const {widget, section, color, id} = route.params;
   const widgetFormOpen = useSelector(state => state.common.widgetFormOpen);
   const dispatch = useDispatch();
   return (
     <Layout>
-      <Widget type={type} section={section} navigation={navigation} id={id} />
+      <Widget
+        widget={widget}
+        section={section}
+        navigation={navigation}
+        id={id}
+      />
       <BottomNav
         navigation={navigation}
         color={color}
